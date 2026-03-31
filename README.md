@@ -3,7 +3,7 @@ CS 122 Adv Python Project: Local Sensitivity Hashing and MinHash
 
 SETUP:
 
-git clone <repo> (https://github.com/josephsbucholtz/Plagiarism-Detector.git)
+git clone <repo>
 cd <repo> 
 
 python3 -m venv .venv
