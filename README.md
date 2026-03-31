@@ -8,6 +8,7 @@ A plagiarism detection project that uses **MinHash** and **Locality Sensitive Ha
 ## Setup
 
 git clone <your-repo-url>
+
 cd Plagiarism-Detector
 
 python3 -m venv .venv
