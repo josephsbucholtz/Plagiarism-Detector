@@ -7,6 +7,7 @@ A plagiarism detection project that uses **MinHash** and **Locality Sensitive Ha
 
 ## Setup
 
+```bash
 git clone <your-repo-url>
 
 cd Plagiarism-Detector
