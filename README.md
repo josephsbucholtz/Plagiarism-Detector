@@ -9,7 +9,7 @@ A plagiarism detection project that uses **MinHash** and **Locality Sensitive Ha
 
 Clone Repo
 ```bash
-git clone <repo>
+git clone [<repo>](https://github.com/josephsbucholtz/Plagiarism-Detector.git)
 ```
 
 CD into repo
