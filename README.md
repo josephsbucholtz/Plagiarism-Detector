@@ -1,10 +1,14 @@
-# Plagiarism-Detector
-CS 122 Adv Python Project: Local Sensitivity Hashing and MinHash 
+# Plagiarism-Detector  
+**CS 122 Advanced Python Project: Locality Sensitive Hashing and MinHash**
 
-SETUP:
+A plagiarism detection project that uses **MinHash** and **Locality Sensitive Hashing (LSH)** to efficiently measure similarity between documents.
 
-git clone <repo>
-cd <repo> 
+---
+
+## Setup
+
+git clone <your-repo-url>
+cd Plagiarism-Detector
 
 python3 -m venv .venv
 
