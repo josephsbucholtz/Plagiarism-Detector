@@ -7,14 +7,28 @@ A plagiarism detection project that uses **MinHash** and **Locality Sensitive Ha
 
 ## Setup
 
+Clone Repo
 ```bash
-git clone <your-repo-url>
+git clone <repo>
+```
 
+CD into repo
+```bash
 cd Plagiarism-Detector
+```
 
+Setup virtual environment
+```bash
 python3 -m venv .venv
+```
 
+Source venv
+```bash
 Mac/Linux: source .venv/bin/activate  
 Windows: .venv\Scripts\activate
+```
 
+install dependencies
+```bash
 pip install -r requirements.txt
+```
