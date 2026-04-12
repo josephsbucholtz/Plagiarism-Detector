@@ -1,45 +1,12 @@
 import os
 import sys
-import string
-from random import shuffle
-import numpy as np 
+import utils
 
-
-def clean_document_data(inputFile: str):
-    text = ""
-    try:
-        with open(inputFile, encoding="utf-8") as input:
-            for line in input:
-                if line == '\n':
-                    continue
-                for word in line:
-                    if word == '\n':
-                        text += ' '
-                    else:
-                        text += word
-        
-            translator = str.maketrans('', '', string.punctuation)    
-            text = text.translate(translator)
-            text = text.lower()
-            return text
-
-    except Exception as e:
-        print(e)
-        return ""
-
-def shingles(text: str, k=3):
-    shingle_set = set()
-    word_list = text.split()
-    for w in range(len(word_list) - k + 1):
-        shingle_set.add(tuple(word_list[w:w+k]))
-
-    return shingle_set
-
-def create_hash(one_hot: list):
+def create_hash(one_hot: list, vocab_size: int):
     signature = []
 
     for func in minhash_func:
-        for i in range(1, len(vocab)+1):
+        for i in range(1, vocab_size + 1):
             idx = func.index(i)
             sig_val = one_hot[idx]
             if sig_val == 1:
@@ -47,36 +14,6 @@ def create_hash(one_hot: list):
                 break
 
     return signature
-
-def create_minhash_func(vocab_size: int, minhash_size: int):
-    hashes = []
-
-    for _ in range(minhash_size):
-        vocab_shuffle = list(range(1, vocab_size + 1))
-        shuffle(vocab_shuffle)
-        hashes.append(vocab_shuffle)
-
-    return hashes
-
-def compare_signatures(sig1, sig2):
-    if len(sig1) != len(sig2) or len(sig1) == 0:
-        return 0
-    
-    matches = 0
-    for x, y in zip(sig1, sig2):
-        if x == y:
-            matches += 1
-
-    return matches / len(sig1)
-
-def jaccard_similarity(set1, set2):
-    union = set1.union(set2)
-    if len(union) == 0:
-        return 0
-    
-    intersection = set1.intersection(set2)
-    return len(intersection) / len(union)
-
 
 # ---------------------- TESTING -------------------------------------
 
@@ -91,15 +28,15 @@ def run_comparison(file1, file2):
     global minhash_func
 
     #Clean Documents for processing data
-    doc1 = clean_document_data(file1)
-    doc2 = clean_document_data(file2)
+    doc1 = utils.clean_document_data(file1)
+    doc2 = utils.clean_document_data(file2)
 
     if not doc1 or not doc2:
         return {"error": "Could not read one or both files."}
 
     #Create k-shingling for each doc
-    a = shingles(doc1)
-    b = shingles(doc2)
+    a = utils.shingles(doc1)
+    b = utils.shingles(doc2)
 
     #Create our Vocab
     vocab = a.union(b)
@@ -113,14 +50,14 @@ def run_comparison(file1, file2):
     b1_hot = [1 if x in b else 0 for x in vocab]
 
     #Create dense vector
-    minhash_func = create_minhash_func(len(vocab), 20)
+    minhash_func = utils.create_minhash_func(len(vocab), 200)
 
     #Create Signatures
-    a_sig = create_hash(a1_hot)
-    b_sig = create_hash(b1_hot)
+    a_sig = create_hash(a1_hot, len(vocab))
+    b_sig = create_hash(b1_hot, len(vocab))
 
-    minhash_similarity = compare_signatures(a_sig, b_sig)
-    real_similarity = jaccard_similarity(a, b)
+    minhash_similarity = utils.compare_signatures(a_sig, b_sig)
+    real_similarity = utils.jaccard_similarity(a, b)
 
     return {
         "file1": file1,
