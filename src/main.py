@@ -1,5 +1,6 @@
 import os
 import sys
+import itertools
 import utils
 
 def create_hash(one_hot: list, vocab_size: int):
@@ -31,16 +32,12 @@ def run_comparison(file1, file2):
     doc1 = utils.clean_document_data(file1)
     doc2 = utils.clean_document_data(file2)
 
-    if not doc1 or not doc2:
-        return {"error": "Could not read one or both files."}
-
     #Create k-shingling for each doc
     a = utils.shingles(doc1)
     b = utils.shingles(doc2)
 
     #Create our Vocab
     vocab = a.union(b)
-    vocab_list = list(vocab)
 
     if len(vocab) == 0:
         return {"error": "Documents are too short or empty."}
@@ -72,16 +69,39 @@ def run_comparison(file1, file2):
         "vocab_size": len(vocab)
     }
 
+def compare_all_files(folder_path):
+    files = [
+        os.path.join(folder_path, f)
+        for f in os.listdir(folder_path)
+        if f.endswith(".txt")
+    ]
+
+    results = []
+
+    for file1, file2 in itertools.combinations(files, 2):
+        result = run_comparison(file1, file2)
+        if "error" not in result:
+            results.append(result)
+
+    return results
+
 
 if __name__ == "__main__":
-    result = run_comparison(declaration_text, declaration_variant)
+    results = compare_all_files("src/data/")
 
-    if "error" in result:
-        print(result["error"])
-    else:
-        print(result["a_sig"])
-        print(result["b_sig"])
+    # Sort by highest estimated similarity
+    results.sort(key=lambda x: x["minhash_similarity"], reverse=True)
+
+    if "error" in results:
+        print(results["error"])
+    
+    for result in results:
+        print("\n")
+        print(f"{os.path.basename(result['file1'])} vs {os.path.basename(result['file2'])}")
         print("Estimated similarity:", result["minhash_similarity"])
         print("Estimated similarity (%):", result["minhash_similarity"] * 100)
         print("Jaccard similarity (REAL):", result["real_similarity"])
         print("Jaccard similarity (REAL %):", result["real_similarity"] * 100)
+        print("\n")
+        print("-------------------------------------------------")
+        print("\n")
