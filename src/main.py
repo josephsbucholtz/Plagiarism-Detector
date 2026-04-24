@@ -16,15 +16,18 @@ lincoln_text = "src/data/lincoln-address.txt"
 
 
 if __name__ == "__main__":
-    # results = compare_all_files("src/data/")
+    # results = utils.compare_all_files("src/data/")
 
     # # Sort by highest estimated similarity
     # results.sort(key=lambda x: x["minhash_similarity"], reverse=True)
 
-    # if "error" in results:
-    #     print(results["error"])
-
     # for result in results:
+    #     if "error" in results:
+    #         print(results["error"])
+
+    #     if result["minhash_similarity"] < 0.05:
+    #         continue 
+
     #     print("\n")
     #     print(f"{os.path.basename(result['file1'])} vs {os.path.basename(result['file2'])}")
     #     print("Estimated similarity:", result["minhash_similarity"])
@@ -34,6 +37,7 @@ if __name__ == "__main__":
     #     print("\n")
     #     print("-------------------------------------------------")
     #     print("\n")
+
+    document.get_wordmap_documents(declaration_sumary, lincoln_text)
     
-    document.get_wordmap_documents(declaration_text, lincoln_text)
     
