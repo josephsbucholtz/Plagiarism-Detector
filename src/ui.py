@@ -1,14 +1,14 @@
 import os
 import tkinter as tk
 from tkinter import filedialog, messagebox
-from main import run_comparison
+import utils
 
 
 def browse_file(entry_widget):
     file_path = filedialog.askopenfilename(
         title="Select Text File",
         initialdir=os.path.abspath("src/data"),
-        filetypes=[("Text Files", "*.txt" "*.docx")]
+        filetypes=[("Text Files", "*.txt")]
     )
     if file_path:
         entry_widget.delete(0, tk.END)
@@ -23,7 +23,7 @@ def compare_documents():
         messagebox.showwarning("Warning", "Please select both files.")
         return
 
-    result = run_comparison(file1, file2)
+    result = utils.run_comparison(file1, file2)
 
     if "error" in result:
         messagebox.showerror("Error", result["error"])
