@@ -8,7 +8,7 @@ def browse_file(entry_widget):
     file_path = filedialog.askopenfilename(
         title="Select Text File",
         initialdir=os.path.abspath("src/data"),
-        filetypes=[("Text Files", "*.txt")]
+        filetypes=[("Text Files", "*.txt" "*.docx")]
     )
     if file_path:
         entry_widget.delete(0, tk.END)
