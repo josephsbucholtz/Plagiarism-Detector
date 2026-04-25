@@ -38,6 +38,7 @@ if __name__ == "__main__":
     #     print("-------------------------------------------------")
     #     print("\n")
 
-    document.get_wordmap_documents(declaration_sumary, lincoln_text)
+    result = utils.run_comparison(declaration_text, declaration_variant)
+    document.get_wordmap_documents(declaration_text, declaration_variant, result["minhash_similarity"] * 100)
     
     

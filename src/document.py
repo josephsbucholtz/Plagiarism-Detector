@@ -1,3 +1,4 @@
+import os
 import string
 from docx import Document
 from docx.enum.text import WD_COLOR_INDEX
@@ -33,34 +34,66 @@ def clean_document_data(inputFile: str):
         print(e)
         return ""
 
-def build_highlighted_doc(words, matching_pairs, output_name):
+def build_highlighted_doc(words, matching_pairs, file1name, file2name, similiarity, output_name):
     doc = Document()
+
+    header = "Comparing: " + file1name + " vs. " + file2name 
+    sim = " (" + str(similiarity) + "% similar)"
+    header = header.upper()
+    p = doc.add_paragraph() 
+    runner = p.add_run(header)
+    runner.bold = True
+    p = p.add_run(sim) 
     p = doc.add_paragraph()
 
     i = 0
     while i < len(words):
         if i < len(words) - 1 and (words[i], words[i + 1]) in matching_pairs:
             run = p.add_run(words[i] + " " + words[i + 1] + " ")
-            run.font.highlight_color = WD_COLOR_INDEX.RED
+            match matching_pairs[(words[i], words[i + 1])]:
+                case 1:
+                    run.font.highlight_color = WD_COLOR_INDEX.GRAY_25
+                case 2:
+                    run.font.highlight_color = WD_COLOR_INDEX.GRAY_50
+                case 3:
+                    run.font.highlight_color = WD_COLOR_INDEX.BLACK
             i += 2
         else:
             p.add_run(words[i] + " ")
             i += 1
 
-    doc.save(output_name)
+    full_path = os.path.join("src/heatmap/", output_name)
+    doc.save(full_path)
 
 
-def get_wordmap_documents(file1: str, file2: str):
+def get_wordmap_documents(file1: str, file2: str, similiarity):
     raw_doc1 = clean_document_data(file1)
     raw_doc2 = clean_document_data(file2)
 
-    doc1_shingles = utils.shingles(raw_doc1)
-    doc2_shingles = utils.shingles(raw_doc2)
+    dic = {}
+    i = 0
+    while (i < 4):
+        doc1_shingles = utils.shingles(raw_doc1)
+        doc2_shingles = utils.shingles(raw_doc2)
 
-    combined_shingles = doc1_shingles.intersection(doc2_shingles)
+        combined_shingles = doc1_shingles.intersection(doc2_shingles)
+
+        for shingle in combined_shingles:
+            if shingle in dic:
+                dic[shingle] += 1
+            else:
+                dic.update({shingle: 0})
+
+        i += 1
 
     wordlist1 = raw_doc1.split()
     wordlist2 = raw_doc2.split()
 
-    build_highlighted_doc(wordlist1, combined_shingles, "doc1_wordmap.docx")
-    build_highlighted_doc(wordlist2, combined_shingles, "doc2_wordmap.docx")
+    file1name = file1.split('/').pop().split('.')[0]
+    file2name = file2.split('/').pop().split('.')[0]
+
+    file1_output = "heatmap-" + file1name + ".docx"
+    file2_output = "heatmap-" + file2name + ".docx"
+
+    build_highlighted_doc(wordlist1, dic, file1name, file2name, similiarity, file1_output)
+    build_highlighted_doc(wordlist2, dic, file2name, file1name, similiarity, file2_output)
