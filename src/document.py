@@ -11,7 +11,7 @@ def lemma(text: str):
     lemmatized_text = " ".join([token.lemma_ for token in doc])
     return lemmatized_text
 
-def clean_document_data(inputFile: str):
+def lemma_clean_document_data(inputFile: str):
     text = ""
     try:
         with open(inputFile, encoding="utf-8") as input:
@@ -34,10 +34,32 @@ def clean_document_data(inputFile: str):
         print(e)
         return ""
 
+def clean_document_data(inputFile: str):
+    text = ""
+    try:
+        with open(inputFile, encoding="utf-8") as input:
+            for line in input:
+                if line == '\n':
+                    continue
+                for word in line:
+                    if word == '\n':
+                        text += ' '
+                    else:
+                        text += word
+        
+            translator = str.maketrans('', '', string.punctuation)    
+            text = text.translate(translator)
+            text = text.lower()
+            # text = lemma(text)
+            return text
+
+    except Exception as e:
+        print(e)
+        return ""
 def build_highlighted_doc(words, matching_pairs, file1name, file2name, similiarity, output_name):
     doc = Document()
 
-    header = "Comparing: " + file1name + " vs. " + file2name 
+    header = "Highlight map: " + file1name + " compared to " + file2name 
     sim = " (" + str(similiarity) + "% similar)"
     header = header.upper()
     p = doc.add_paragraph() 
@@ -56,7 +78,7 @@ def build_highlighted_doc(words, matching_pairs, file1name, file2name, similiari
             p.add_run(words[i] + " ")
             i += 1
 
-    full_path = os.path.join("src/highlight/", output_name)
+    full_path = os.path.join("src/highlight-docs/", output_name)
     doc.save(full_path)
 
 
@@ -75,8 +97,26 @@ def get_wordmap_documents(file1: str, file2: str, similiarity):
     file1name = file1.split('/').pop().split('.')[0]
     file2name = file2.split('/').pop().split('.')[0]
 
-    file1_output = "highlight-" + file1name + ".docx"
-    file2_output = "highlight-" + file2name + ".docx"
+    file1_output = "highlight-" + file1name + file2name + ".docx"
+    file2_output = "highlight-" + file2name + file1name + ".docx"
 
     build_highlighted_doc(wordlist1, combined_shingles, file1name, file2name, similiarity, file1_output)
     build_highlighted_doc(wordlist2, combined_shingles, file2name, file1name, similiarity, file2_output)
+
+def get_wordmap_doc(file1: str, file2: str, similiarity):
+    raw_doc1 = clean_document_data(file1)
+    raw_doc2 = clean_document_data(file2)
+
+    doc1_shingles = utils.shingles(raw_doc1)
+    doc2_shingles = utils.shingles(raw_doc2)
+
+    combined_shingles = doc1_shingles.intersection(doc2_shingles)
+
+    wordlist1 = raw_doc1.split()
+
+    file1name = file1.split('/').pop().split('.')[0]
+    file2name = file2.split('/').pop().split('.')[0]
+
+    file1_output = "highlight-" + file1name + file2name + ".docx"
+
+    build_highlighted_doc(wordlist1, combined_shingles, file1name, file2name, similiarity, file1_output)

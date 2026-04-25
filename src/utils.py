@@ -60,8 +60,8 @@ def run_comparison(file1, file2):
     global minhash_func
 
     #Clean Documents for processing data
-    doc1 = document.clean_document_data(file1)
-    doc2 = document.clean_document_data(file2)
+    doc1 = document.lemma_clean_document_data(file1)
+    doc2 = document.lemma_clean_document_data(file2)
 
     #Create k-shingling for each doc
     a = shingles(doc1)
