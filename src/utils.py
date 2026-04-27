@@ -36,8 +36,6 @@ def create_minhash_func(vocab_size: int, minhash_size: int):
     return hashes
 
 def compare_signatures(sig1, sig2):
-    if len(sig1) != len(sig2) or len(sig1) == 0:
-        return 0
     
     matches = 0
     for x, y in zip(sig1, sig2):
