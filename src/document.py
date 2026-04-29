@@ -1,122 +1,107 @@
-import os
-import string
+from __future__ import annotations
+
+from pathlib import Path
+
 from docx import Document
 from docx.enum.text import WD_COLOR_INDEX
-import spacy
-import utils
 
-def lemma(text: str):
-    nlp = spacy.load("en_core_web_sm")
-    doc = nlp(text)
-    lemmatized_text = " ".join([token.lemma_ for token in doc])
-    return lemmatized_text
+import library_manager
+import text_processing
 
-def lemma_clean_document_data(inputFile: str):
-    text = ""
-    try:
-        with open(inputFile, encoding="utf-8") as input:
-            for line in input:
-                if line == '\n':
-                    continue
-                for word in line:
-                    if word == '\n':
-                        text += ' '
-                    else:
-                        text += word
-        
-            translator = str.maketrans('', '', string.punctuation)    
-            text = text.translate(translator)
-            text = text.lower()
-            text = lemma(text)
-            return text
 
-    except Exception as e:
-        print(e)
-        return ""
-
-def clean_document_data(inputFile: str):
-    text = ""
-    try:
-        with open(inputFile, encoding="utf-8") as input:
-            for line in input:
-                if line == '\n':
-                    continue
-                for word in line:
-                    if word == '\n':
-                        text += ' '
-                    else:
-                        text += word
-        
-            translator = str.maketrans('', '', string.punctuation)    
-            text = text.translate(translator)
-            text = text.lower()
-            # text = lemma(text)
-            return text
-
-    except Exception as e:
-        print(e)
-        return ""
-def build_highlighted_doc(words, matching_pairs, file1name, file2name, similiarity, output_name):
+def build_highlighted_doc(
+    words: list[str],
+    matching_shingles: set[str],
+    file1_name: str,
+    file2_name: str,
+    similarity: float,
+    output_name: str,
+    shingle_size: int,
+) -> str:
+    library_manager.ensure_runtime_directories()
     doc = Document()
 
-    header = "Highlight map: " + file1name + " compared to " + file2name 
-    sim = " (" + str(similiarity) + "% similar)"
-    header = header.upper()
-    p = doc.add_paragraph() 
-    runner = p.add_run(header)
-    runner.bold = True
-    p = p.add_run(sim) 
-    p = doc.add_paragraph()
+    header = f"HIGHLIGHT MAP: {file1_name} compared to {file2_name}"
+    paragraph = doc.add_paragraph()
+    title_run = paragraph.add_run(header)
+    title_run.bold = True
+    paragraph.add_run(f" ({similarity:.2f}% similar)")
+    content_paragraph = doc.add_paragraph()
 
-    i = 0
-    while i < len(words):
-        if i < len(words) - 1 and (words[i], words[i + 1]) in matching_pairs:
-            run = p.add_run(words[i] + " " + words[i + 1] + " ")
+    index = 0
+    while index < len(words):
+        candidate_words = words[index:index + shingle_size]
+        candidate_shingle = " ".join(candidate_words)
+
+        if len(candidate_words) == shingle_size and candidate_shingle in matching_shingles:
+            run = content_paragraph.add_run(candidate_shingle + " ")
             run.font.highlight_color = WD_COLOR_INDEX.RED
-            i += 2
-        else:
-            p.add_run(words[i] + " ")
-            i += 1
+            index += shingle_size
+            continue
 
-    full_path = os.path.join("src/highlight-docs/", output_name)
+        content_paragraph.add_run(words[index] + " ")
+        index += 1
+
+    full_path = library_manager.HIGHLIGHT_DIR / output_name
     doc.save(full_path)
+    return str(full_path)
 
 
-def get_wordmap_documents(file1: str, file2: str, similiarity):
-    raw_doc1 = clean_document_data(file1)
-    raw_doc2 = clean_document_data(file2)
+def create_highlight_documents(
+    file1: str,
+    file2: str,
+    similarity_percent: float,
+    include_second_document: bool = False,
+) -> list[str]:
+    profile1 = library_manager.build_document_profile(file1)
+    profile2 = library_manager.build_document_profile(file2)
+    common_shingles = set(profile1["shingles"]).intersection(profile2["shingles"])
+    if not common_shingles:
+        return []
 
-    doc1_shingles = utils.shingles(raw_doc1)
-    doc2_shingles = utils.shingles(raw_doc2)
+    file1_name = Path(file1).stem
+    file2_name = Path(file2).stem
+    shingle_size = profile1.get("shingle_size", library_manager.DEFAULT_SHINGLE_SIZE)
+    output_paths = [
+        build_highlighted_doc(
+            profile1["normalized_text"].split(),
+            common_shingles,
+            file1_name,
+            file2_name,
+            similarity_percent,
+            f"highlight-{file1_name}-{file2_name}.docx",
+            shingle_size,
+        )
+    ]
 
-    combined_shingles = doc1_shingles.intersection(doc2_shingles)
+    if include_second_document:
+        output_paths.append(
+            build_highlighted_doc(
+                profile2["normalized_text"].split(),
+                common_shingles,
+                file2_name,
+                file1_name,
+                similarity_percent,
+                f"highlight-{file2_name}-{file1_name}.docx",
+                shingle_size,
+            )
+        )
 
-    wordlist1 = raw_doc1.split()
-    wordlist2 = raw_doc2.split()
+    return output_paths
 
-    file1name = file1.split('/').pop().split('.')[0]
-    file2name = file2.split('/').pop().split('.')[0]
 
-    file1_output = "highlight-" + file1name + file2name + ".docx"
-    file2_output = "highlight-" + file2name + file1name + ".docx"
+def clean_document_data(input_file: str):
+    return text_processing.clean_document_data(input_file, use_lemma=False)
 
-    build_highlighted_doc(wordlist1, combined_shingles, file1name, file2name, similiarity, file1_output)
-    build_highlighted_doc(wordlist2, combined_shingles, file2name, file1name, similiarity, file2_output)
 
-def get_wordmap_doc(file1: str, file2: str, similiarity):
-    raw_doc1 = clean_document_data(file1)
-    raw_doc2 = clean_document_data(file2)
+def lemma_clean_document_data(input_file: str):
+    return text_processing.clean_document_data(input_file, use_lemma=True)
 
-    doc1_shingles = utils.shingles(raw_doc1)
-    doc2_shingles = utils.shingles(raw_doc2)
 
-    combined_shingles = doc1_shingles.intersection(doc2_shingles)
+def get_wordmap_documents(file1: str, file2: str, similarity: float):
+    return create_highlight_documents(file1, file2, similarity, include_second_document=True)
 
-    wordlist1 = raw_doc1.split()
 
-    file1name = file1.split('/').pop().split('.')[0]
-    file2name = file2.split('/').pop().split('.')[0]
-
-    file1_output = "highlight-" + file1name + file2name + ".docx"
-
-    build_highlighted_doc(wordlist1, combined_shingles, file1name, file2name, similiarity, file1_output)
+def get_wordmap_doc(file1: str, file2: str, similarity: float):
+    output_paths = create_highlight_documents(file1, file2, similarity, include_second_document=False)
+    return output_paths[0] if output_paths else None

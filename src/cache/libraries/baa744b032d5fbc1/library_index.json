@@ -1,0 +1,88 @@
+{
+  "library_dir": "E:\\CsProject\\Plagiarism-Detector\\src\\data",
+  "settings": {
+    "shingle_size": 3,
+    "use_lemma": true,
+    "num_permutations": 128,
+    "seed": 42
+  },
+  "documents": [
+    {
+      "file_name": "declaration-reordered.txt",
+      "file_path": "E:\\CsProject\\Plagiarism-Detector\\src\\data\\declaration-reordered.txt",
+      "cache_path": "E:\\CsProject\\Plagiarism-Detector\\src\\cache\\libraries\\baa744b032d5fbc1\\documents\\a24ae3e5d0540eea.json",
+      "normalized_hash": "6b2fe6c6515d1c73cc9c2bb269021b06f6c02e413c86707782d470b2cc743c2d",
+      "shingle_fingerprint": "bc420d13b9dde7a34fcf9977ecb1ad9e919bcf86b667d8efc57bfb908b08843f",
+      "num_tokens": 134,
+      "num_shingles": 132,
+      "source_size": 929,
+      "source_mtime_ns": 1777442708577358200
+    },
+    {
+      "file_name": "declaration-summary.txt",
+      "file_path": "E:\\CsProject\\Plagiarism-Detector\\src\\data\\declaration-summary.txt",
+      "cache_path": "E:\\CsProject\\Plagiarism-Detector\\src\\cache\\libraries\\baa744b032d5fbc1\\documents\\3ca0a01947cf2ea4.json",
+      "normalized_hash": "7c1918e2750c1e7b2b643c6e4a1ae24a9cdb0b0c4aeb85107a07ede024d8e1c6",
+      "shingle_fingerprint": "d12d8967c46c1fa0e9539515cf6c732f5745738d9d42ac28a18b6f97066f65f8",
+      "num_tokens": 140,
+      "num_shingles": 138,
+      "source_size": 901,
+      "source_mtime_ns": 1777442708577358200
+    },
+    {
+      "file_name": "declaration-variant.txt",
+      "file_path": "E:\\CsProject\\Plagiarism-Detector\\src\\data\\declaration-variant.txt",
+      "cache_path": "E:\\CsProject\\Plagiarism-Detector\\src\\cache\\libraries\\baa744b032d5fbc1\\documents\\4a61956be48bf45b.json",
+      "normalized_hash": "acd6fd2fb908ffe5cb3b2480b872310c971deb9e684e58dca204f80d537d49a4",
+      "shingle_fingerprint": "bb4e2e334b74d7c15e24fbab16bb646409de7416eba6575c45d11afdf7af3453",
+      "num_tokens": 390,
+      "num_shingles": 384,
+      "source_size": 2387,
+      "source_mtime_ns": 1777442708578334200
+    },
+    {
+      "file_name": "declaration.txt",
+      "file_path": "E:\\CsProject\\Plagiarism-Detector\\src\\data\\declaration.txt",
+      "cache_path": "E:\\CsProject\\Plagiarism-Detector\\src\\cache\\libraries\\baa744b032d5fbc1\\documents\\6d86fbeb7e60e0a5.json",
+      "normalized_hash": "d61f45ee62f848e51a0f2bee749c7417477c2e924a0104621e2d2db3d1f36b28",
+      "shingle_fingerprint": "e05945e4c883a1fe0ec0af3a3309b6c5adead7bf93d91c8324a84b9f3619ae4b",
+      "num_tokens": 1334,
+      "num_shingles": 1305,
+      "source_size": 8215,
+      "source_mtime_ns": 1777442708578334200
+    },
+    {
+      "file_name": "lincoln-address.txt",
+      "file_path": "E:\\CsProject\\Plagiarism-Detector\\src\\data\\lincoln-address.txt",
+      "cache_path": "E:\\CsProject\\Plagiarism-Detector\\src\\cache\\libraries\\baa744b032d5fbc1\\documents\\a4e86efd783fc28b.json",
+      "normalized_hash": "b787496ccfeb0ffd4e2108bc00b3780970b768c9dfa3d965ae770a9af96ede2a",
+      "shingle_fingerprint": "dc0f8dbfed1151c3f4fd7f91e09a867d5bee7e6f6bade75575436fea10e1df02",
+      "num_tokens": 260,
+      "num_shingles": 257,
+      "source_size": 1474,
+      "source_mtime_ns": 1777442708578334200
+    },
+    {
+      "file_name": "repeated.txt",
+      "file_path": "E:\\CsProject\\Plagiarism-Detector\\src\\data\\repeated.txt",
+      "cache_path": "E:\\CsProject\\Plagiarism-Detector\\src\\cache\\libraries\\baa744b032d5fbc1\\documents\\0df80b211dc49c58.json",
+      "normalized_hash": "5fd3d41b9a9f8441342a37ee3f9397b51fc0678e6b9adda064819864ba965c2d",
+      "shingle_fingerprint": "0fceaa4898fabd2f0b57c94505e6ae59fd541f0094b0cbe64e27ddc210d0c128",
+      "num_tokens": 14,
+      "num_shingles": 1,
+      "source_size": 111,
+      "source_mtime_ns": 1777442708578334200
+    },
+    {
+      "file_name": "short.txt",
+      "file_path": "E:\\CsProject\\Plagiarism-Detector\\src\\data\\short.txt",
+      "cache_path": "E:\\CsProject\\Plagiarism-Detector\\src\\cache\\libraries\\baa744b032d5fbc1\\documents\\5dd7d9d40faaae52.json",
+      "normalized_hash": "6a0df2b8bdd9b20cdfb18d884400b909f371e266d3713e314775a1f7fc232950",
+      "shingle_fingerprint": "afc349db36adc73e78fa38a8f9c134ead5ef23f9a053b658c60c958dde144f82",
+      "num_tokens": 4,
+      "num_shingles": 2,
+      "source_size": 29,
+      "source_mtime_ns": 1777442708579310000
+    }
+  ]
+}
