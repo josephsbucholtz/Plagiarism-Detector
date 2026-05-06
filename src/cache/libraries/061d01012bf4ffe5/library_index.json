@@ -1,0 +1,132 @@
+{
+  "library_dir": "E:\\CsProject\\Plagiarism-Detector\\src\\essays",
+  "settings": {
+    "shingle_size": 3,
+    "use_lemma": true,
+    "num_permutations": 128,
+    "seed": 42
+  },
+  "documents": [
+    {
+      "file_name": "essay (1).txt",
+      "file_path": "E:\\CsProject\\Plagiarism-Detector\\src\\essays\\essay (1).txt",
+      "cache_path": "E:\\CsProject\\Plagiarism-Detector\\src\\cache\\libraries\\061d01012bf4ffe5\\documents\\48a57674d04cc6d4.json",
+      "normalized_hash": "1899c94c9c4e41fce31b32bb3892f5e2a57e45ed5ca4e686491e735c7a1ea4e1",
+      "shingle_fingerprint": "73f25bcb422db7ba723cd110a622d189d6173d4f57652c832702ed0be09a690c",
+      "num_tokens": 951,
+      "num_shingles": 928,
+      "source_size": 6246,
+      "source_mtime_ns": 1777442708579310000
+    },
+    {
+      "file_name": "essay (10).txt",
+      "file_path": "E:\\CsProject\\Plagiarism-Detector\\src\\essays\\essay (10).txt",
+      "cache_path": "E:\\CsProject\\Plagiarism-Detector\\src\\cache\\libraries\\061d01012bf4ffe5\\documents\\9f129dc78c04d6a8.json",
+      "normalized_hash": "8a7725d5b3829d4f12612d52cebc193e5b6b67c752baa7b724dbebe3c295a043",
+      "shingle_fingerprint": "6b7a17bb617c6748f27a599a83fcd51ebfbf1e65e0f43b41e29dcf9a1b982cda",
+      "num_tokens": 861,
+      "num_shingles": 851,
+      "source_size": 5907,
+      "source_mtime_ns": 1777442708580286800
+    },
+    {
+      "file_name": "essay (11).txt",
+      "file_path": "E:\\CsProject\\Plagiarism-Detector\\src\\essays\\essay (11).txt",
+      "cache_path": "E:\\CsProject\\Plagiarism-Detector\\src\\cache\\libraries\\061d01012bf4ffe5\\documents\\3a5594191ecca1e8.json",
+      "normalized_hash": "f8a2054b082ef7888951b785b14251f78a6618a70ef10b3bbe71c32157acf238",
+      "shingle_fingerprint": "3199eb03793acf984f8ee2395e00d820add729f8dfd792d8a398117c5f5c7805",
+      "num_tokens": 519,
+      "num_shingles": 512,
+      "source_size": 3581,
+      "source_mtime_ns": 1777442708580286800
+    },
+    {
+      "file_name": "essay (2).txt",
+      "file_path": "E:\\CsProject\\Plagiarism-Detector\\src\\essays\\essay (2).txt",
+      "cache_path": "E:\\CsProject\\Plagiarism-Detector\\src\\cache\\libraries\\061d01012bf4ffe5\\documents\\00d13f879a0fced6.json",
+      "normalized_hash": "5a7cf27353fbb6684c7c9dc347a42d896576bd957be76409267bac2bed60072e",
+      "shingle_fingerprint": "60209a5c86ba97d466065c6ee28fc7cb3b8d8cd0d82298018d8e766b2b239402",
+      "num_tokens": 981,
+      "num_shingles": 956,
+      "source_size": 6669,
+      "source_mtime_ns": 1777442708580286800
+    },
+    {
+      "file_name": "essay (3).txt",
+      "file_path": "E:\\CsProject\\Plagiarism-Detector\\src\\essays\\essay (3).txt",
+      "cache_path": "E:\\CsProject\\Plagiarism-Detector\\src\\cache\\libraries\\061d01012bf4ffe5\\documents\\3c501e381dc7d7bb.json",
+      "normalized_hash": "89e8bb7344e99d5d7b002a5ffcef1b98babbad59b487a4c68ba17bfdff8b9da7",
+      "shingle_fingerprint": "6be58f07a3ddb3dcb3cf6cf2b004f3206b5dbd4e44686d4d229a16b7b2daf2f8",
+      "num_tokens": 992,
+      "num_shingles": 969,
+      "source_size": 6845,
+      "source_mtime_ns": 1777442708580286800
+    },
+    {
+      "file_name": "essay (4).txt",
+      "file_path": "E:\\CsProject\\Plagiarism-Detector\\src\\essays\\essay (4).txt",
+      "cache_path": "E:\\CsProject\\Plagiarism-Detector\\src\\cache\\libraries\\061d01012bf4ffe5\\documents\\1a3cbb9e63c7a9ea.json",
+      "normalized_hash": "64ed0b5e3813263aacd6a619590d9382efdd9aa51854f89b21c990a9636083e8",
+      "shingle_fingerprint": "262fc716bf48c16c4c2e412bdea95a7b12b72bf1368627105839cbfa8672e983",
+      "num_tokens": 1025,
+      "num_shingles": 1008,
+      "source_size": 6149,
+      "source_mtime_ns": 1777442708581263300
+    },
+    {
+      "file_name": "essay (5).txt",
+      "file_path": "E:\\CsProject\\Plagiarism-Detector\\src\\essays\\essay (5).txt",
+      "cache_path": "E:\\CsProject\\Plagiarism-Detector\\src\\cache\\libraries\\061d01012bf4ffe5\\documents\\8a427c0e006b0b45.json",
+      "normalized_hash": "60ab7efe60873efdf4afe000bfd102340b32ed4181f06fc794e8642f7a29e01e",
+      "shingle_fingerprint": "e05197a359d6f49b9783058ebb87bd603cadb8baae42d8b6095680b9eb44221c",
+      "num_tokens": 956,
+      "num_shingles": 944,
+      "source_size": 6689,
+      "source_mtime_ns": 1777442708581263300
+    },
+    {
+      "file_name": "essay (6).txt",
+      "file_path": "E:\\CsProject\\Plagiarism-Detector\\src\\essays\\essay (6).txt",
+      "cache_path": "E:\\CsProject\\Plagiarism-Detector\\src\\cache\\libraries\\061d01012bf4ffe5\\documents\\6ea32d31c08bfe46.json",
+      "normalized_hash": "30d99653d74acd8a469fc7fb18f0dfdd074d3e203a1866df993179789f1d8b12",
+      "shingle_fingerprint": "d9e8c8376a5d593efefec5693aa3627e6ca7b25e75fc966aa08ab221295a47ed",
+      "num_tokens": 1090,
+      "num_shingles": 1060,
+      "source_size": 7352,
+      "source_mtime_ns": 1777442708581263300
+    },
+    {
+      "file_name": "essay (7).txt",
+      "file_path": "E:\\CsProject\\Plagiarism-Detector\\src\\essays\\essay (7).txt",
+      "cache_path": "E:\\CsProject\\Plagiarism-Detector\\src\\cache\\libraries\\061d01012bf4ffe5\\documents\\18d6233333603dac.json",
+      "normalized_hash": "9c9deb5ebb274caf95cad116f37af08bd012d20292fefc2142ba72bed1677214",
+      "shingle_fingerprint": "63e3af5f3ff3270b73dbd019588d8da8a2d7bc0b668db90fb4642bbefa9bec23",
+      "num_tokens": 899,
+      "num_shingles": 879,
+      "source_size": 6032,
+      "source_mtime_ns": 1777442708582240800
+    },
+    {
+      "file_name": "essay (8).txt",
+      "file_path": "E:\\CsProject\\Plagiarism-Detector\\src\\essays\\essay (8).txt",
+      "cache_path": "E:\\CsProject\\Plagiarism-Detector\\src\\cache\\libraries\\061d01012bf4ffe5\\documents\\9b0fa0419ee63239.json",
+      "normalized_hash": "fbad46b512832f831f2816e705e08b2afe7aa2988d9354f2645034b239e603ac",
+      "shingle_fingerprint": "08672c858f59c3bb613041257de34f73ba5040acdfa2c178d1b09e9c8973a138",
+      "num_tokens": 1009,
+      "num_shingles": 993,
+      "source_size": 6084,
+      "source_mtime_ns": 1777442708582240800
+    },
+    {
+      "file_name": "essay (9).txt",
+      "file_path": "E:\\CsProject\\Plagiarism-Detector\\src\\essays\\essay (9).txt",
+      "cache_path": "E:\\CsProject\\Plagiarism-Detector\\src\\cache\\libraries\\061d01012bf4ffe5\\documents\\a8e34a55b3f8ea85.json",
+      "normalized_hash": "1ed07421ca43548a400f2ea1195c25e3c8a09f4b8f1b7313d5abf7f240bcb26e",
+      "shingle_fingerprint": "b15c2f35a44583d65cb21625522ad84fff32db2a73184c40561b93d159580b27",
+      "num_tokens": 553,
+      "num_shingles": 550,
+      "source_size": 3853,
+      "source_mtime_ns": 1777442708582240800
+    }
+  ]
+}
